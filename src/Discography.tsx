@@ -72,6 +72,7 @@ const Discography: React.FC<DiscographyProps> = ({ onAddToCart }) => {
                   alt={album.title} 
                   className="w-full h-full object-cover" 
                   referrerPolicy="no-referrer" 
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               </div>
@@ -140,7 +141,7 @@ const Discography: React.FC<DiscographyProps> = ({ onAddToCart }) => {
                   transition={{ delay: 0.1 }}
                   className="w-48 md:w-64 h-48 md:h-64 mb-10 md:mb-16 shadow-2xl rounded-[2rem] md:rounded-[4rem] overflow-hidden border border-slate-100"
                 >
-                  <img src={selectedAlbum.coverUrl} className="w-full h-full object-cover" alt={selectedAlbum.title} referrerPolicy="no-referrer" />
+                  <img src={selectedAlbum.coverUrl} className="w-full h-full object-cover" alt={selectedAlbum.title} referrerPolicy="no-referrer" loading="lazy" />
                 </motion.div>
 
                 <h2 className="text-4xl md:text-7xl font-black text-slate-900 mb-4 leading-none tracking-tighter uppercase">{selectedAlbum.title}</h2>

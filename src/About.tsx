@@ -35,6 +35,7 @@ const About: React.FC = () => {
               alt="Beatrice Egli" 
               className="w-full h-full object-cover scale-110" 
               referrerPolicy="no-referrer"
+              loading="lazy"
              />
            </div>
            <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-transparent to-slate-50" />
@@ -74,6 +75,7 @@ const About: React.FC = () => {
                   alt="Beatrice Egli Portrait"
                   className="w-full h-full object-cover transition-all duration-[3s] group-hover:scale-110" 
                   referrerPolicy="no-referrer"
+                  loading="lazy"
                 />
               </div>
               <motion.div 
@@ -215,6 +217,7 @@ const About: React.FC = () => {
                     className="w-full h-full object-cover scale-100 group-hover:scale-110 transition-transform duration-[1.5s] ease-out" 
                     alt={`Atmosphere ${i+1}`} 
                     referrerPolicy="no-referrer"
+                    loading="lazy"
                    />
                 </motion.div>
               ))}

@@ -1,15 +1,24 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { HashRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { ShoppingCart, Menu, X, Instagram, Youtube, Globe } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { ASSETS } from './assets';
 import { CartItem } from './types';
-import Home from './Home';
-import Tour from './Tour';
-import Discography from './Discography';
-import About from './About';
-import Checkout from './Checkout';
+
+// Lazy load route components for code splitting
+const Home = lazy(() => import('./Home'));
+const Tour = lazy(() => import('./Tour'));
+const Discography = lazy(() => import('./Discography'));
+const About = lazy(() => import('./About'));
+const Checkout = lazy(() => import('./Checkout'));
+
+// Loading fallback component
+const PageLoader = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-400" />
+  </div>
+);
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -263,13 +272,15 @@ function App() {
         
         <Navbar cartCount={cart.reduce((acc, i) => acc + i.quantity, 0)} />
         <main className="flex-grow relative z-10">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/tour" element={<Tour onAddToCart={addToCart} />} />
-            <Route path="/discography" element={<Discography onAddToCart={addToCart} />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/checkout" element={<Checkout cart={cart} onRemove={removeFromCart} onUpdate={updateQuantity} />} />
-          </Routes>
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/tour" element={<Tour onAddToCart={addToCart} />} />
+              <Route path="/discography" element={<Discography onAddToCart={addToCart} />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/checkout" element={<Checkout cart={cart} onRemove={removeFromCart} onUpdate={updateQuantity} />} />
+            </Routes>
+          </Suspense>
         </main>
         <Footer />
       </div>

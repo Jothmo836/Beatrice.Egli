@@ -47,7 +47,7 @@ const Tour: React.FC<TourProps> = ({ onAddToCart }) => {
     <div className="pt-32 md:pt-48 pb-32 md:pb-64 px-6 bg-slate-900 min-h-screen relative overflow-hidden">
       {/* Immersive Background Elements */}
       <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
-        <img src={ASSETS.HOME.TOUR_PREVIEW_BG} className="w-full h-full object-cover grayscale" referrerPolicy="no-referrer" />
+        <img src={ASSETS.HOME.TOUR_PREVIEW_BG} className="w-full h-full object-cover grayscale" referrerPolicy="no-referrer" loading="lazy" />
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-transparent to-slate-900" />
       </div>
 

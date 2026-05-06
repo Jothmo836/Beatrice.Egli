@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'motion/react';
 import { TOUR_DATES } from './constants';
 import { ASSETS } from './assets';
+import { LazyImage } from './LazyImage';
 
 const Home: React.FC = () => {
   const craftBgRef = useRef<HTMLDivElement>(null);
@@ -40,6 +41,7 @@ const Home: React.FC = () => {
             alt="Beatrice Egli Hero Background"
             className="w-full h-full object-cover"
             referrerPolicy="no-referrer"
+            loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-amber-50" />
         </div>
@@ -81,6 +83,7 @@ const Home: React.FC = () => {
                   alt="Beatrice Egli Performance" 
                   className="w-full h-full object-cover aspect-[4/5] md:aspect-square lg:aspect-auto lg:h-[700px] hover:scale-105 transition-transform duration-[3s]"
                   referrerPolicy="no-referrer"
+                  loading="lazy"
                 />
               </div>
               <motion.div 
@@ -129,6 +132,7 @@ const Home: React.FC = () => {
               alt="Music Studio" 
               className="w-full h-full object-cover" 
               referrerPolicy="no-referrer"
+              loading="lazy"
             />
           </div>
           <div className="absolute inset-0 bg-white/70 backdrop-blur-[2px]" />
@@ -281,6 +285,7 @@ const Home: React.FC = () => {
                         alt={`Gallery ${idx}`} 
                         className="w-full h-full object-cover scale-100 group-hover:scale-110 transition-all duration-[1.5s] ease-out"
                         referrerPolicy="no-referrer"
+                        loading="lazy"
                       />
                    </div>
                    <div className="absolute inset-x-0 bottom-0 p-10 bg-gradient-to-t from-slate-900 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-500">
