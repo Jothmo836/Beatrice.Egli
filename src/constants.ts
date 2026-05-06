@@ -196,7 +196,7 @@ export const ALBUMS: Album[] = [
 ];
 
 export const NEWS: NewsItem[] = [
-  { id: 'n1', title: 'Arena Tour 2026: Extra Dates Added Due to High Demand', date: 'Apr 20, 2026', category: 'Tour', imageUrl: ASSETS.NEWS.SINGLE_REACH },
+  { id: 'n1', title: 'Arena Tour 2026: Extra Dates Added Due to High Demand', date: 'Apr 20, 2026', category: 'Tickets & Bookings', imageUrl: ASSETS.NEWS.SINGLE_REACH },
   { id: 'n2', title: 'Beatrice Egli Show Sets New Record Ratings', date: 'Mar 15, 2026', category: 'Television', imageUrl: ASSETS.NEWS.WORKSHOP },
   { id: 'n3', title: 'Exclusive "Volles Risiko" Live Album Announced', date: 'Feb 10, 2026', category: 'Music', imageUrl: ASSETS.NEWS.STUDIO_SESSIONS },
 ];

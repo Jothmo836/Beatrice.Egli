@@ -297,7 +297,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Tour List Preview */}
+      {/* Tickets & Bookings List Preview */}
       <section className="relative py-24 md:py-64 px-6 bg-white overflow-hidden">
         <div className="max-w-6xl mx-auto relative z-10">
           <motion.div 

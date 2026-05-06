@@ -17,7 +17,7 @@ const resources = {
       },
       nav: {
         home: "Home",
-        tour: "Tour",
+        tour: "Tickets & Bookings",
         music: "Music",
         merch: "Merch",
         story: "Story",
@@ -41,7 +41,7 @@ const resources = {
         about: "About Beatrice",
         era: "The New Era of Beatrice Egli",
         music: "Music",
-        tour: "Tour",
+        tour: "Tickets & Bookings",
         upcomingShows: "Upcoming Shows",
         viewFullTour: "View Full Tour",
         tickets: "Tickets",
@@ -60,7 +60,7 @@ const resources = {
         updateText: "Beatrice is taking the \"Volles Risiko\" to the next level during her upcoming tour! Get ready for a spectacular show featuring her latest hits and the beloved classics.",
         readBio: "Read Full Bio",
         musicDesc: "Explore the full catalog from Glücksgefühle to the latest signed master recordings.",
-        tourDesc: "See Beatrice live. Official ticket links for all upcoming global engagements.",
+        tourDesc: "Get your tickets and book exclusive experiences. Official booking links for all upcoming global engagements.",
         merchDesc: "Official merchandise. From limited hoodies to exclusive accessories.",
         merchSubtitle: "High-quality products for the ultimate fan experience.",
         visualJourney: "Visual Journey",
@@ -92,7 +92,7 @@ const resources = {
         n2: "Beatrice Egli Show Sets New Record Ratings",
         n3: "Exclusive \"Volles Risiko\" Live Album Announced",
         categories: {
-          tour: "Tour",
+          tour: "Tickets & Bookings",
           television: "Television",
           music: "Music"
         }
@@ -124,8 +124,8 @@ const resources = {
         }
       },
       tour: {
-        subtitle: "Volles Risiko Tour",
-        title: "TOUR 2026",
+        subtitle: "Volles Risiko - Tickets & Bookings",
+        title: "TICKETS & BOOKINGS 2026",
         upcoming: "Upcoming Shows",
         archive: "Archive",
         soldOut: "Sold Out",
@@ -213,7 +213,7 @@ const resources = {
       },
       nav: {
         home: "Startseite",
-        tour: "Tour",
+        tour: "Tickets & Buchungen",
         music: "Musik",
         merch: "Merch",
         story: "Story",
@@ -237,7 +237,7 @@ const resources = {
         about: "Über Beatrice",
         era: "Die neue Ära der Beatrice Egli",
         music: "Musik",
-        tour: "Tour",
+        tour: "Tickets & Buchungen",
         upcomingShows: "Kommende Shows",
         viewFullTour: "Ganze Tour ansehen",
         tickets: "Tickets",
@@ -256,7 +256,7 @@ const resources = {
         updateText: "Beatrice bringt das \"Volles Risiko\" auf ihrer kommenden Tour auf das nächste Level! Mach dich bereit für eine spektakuläre Show mit ihren neuesten Hits und beliebten Klassikern.",
         readBio: "Ganze Bio lesen",
         musicDesc: "Entdecke den gesamten Katalog von Glücksgefühle bis hin zu den neuesten signierten Master-Aufnahmen.",
-        tourDesc: "Erlebe Beatrice live. Offizielle Ticket-Links für alle anstehenden globalen Auftritte.",
+        tourDesc: "Hol deine Tickets und buche exklusive Erlebnisse. Offizielle Buchungslinks für alle anstehenden globalen Auftritte.",
         merchDesc: "Offizielles Merchandise. Von limitierten Hoodies bis zu exklusiven Accessoires.",
         merchSubtitle: "Hochwertige Produkte für das ultimative Fan-Erlebnis.",
         visualJourney: "Visuelle Reise",
@@ -288,7 +288,7 @@ const resources = {
         n2: "Beatrice Egli Show stellt neue Quotenrekorde auf",
         n3: "Exklusives \"Volles Risiko\" Live-Album angekündigt",
         categories: {
-          tour: "Tour",
+          tour: "Tickets & Buchungen",
           television: "Fernsehen",
           music: "Musik"
         }
@@ -320,8 +320,8 @@ const resources = {
         }
       },
       tour: {
-        subtitle: "Volles Risiko Tour",
-        title: "TOUR 2026",
+        subtitle: "Volles Risiko - Tickets & Buchungen",
+        title: "TICKETS & BUCHUNGEN 2026",
         upcoming: "Kommende Shows",
         archive: "Archiv",
         soldOut: "Ausverkauft",
