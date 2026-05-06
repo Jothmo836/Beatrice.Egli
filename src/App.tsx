@@ -66,10 +66,10 @@ const Navbar: React.FC<{ cartCount: number }> = ({ cartCount }) => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-[1000] transition-all duration-500 ${isScrolled ? 'bg-amber-50/95 backdrop-blur-xl py-3 md:py-4 border-b border-orange-200 shadow-sm' : 'bg-transparent py-4 md:py-8'}`}>
+    <nav className={`fixed top-0 left-0 w-full z-[1000] transition-all duration-500 ${isScrolled ? 'bg-slate-900/95 backdrop-blur-xl py-3 md:py-4 border-b border-amber-400/30 shadow-lg' : 'bg-slate-900/80 backdrop-blur-md py-4 md:py-8'}`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <Link to="/" className="text-sm md:text-xl font-bold tracking-tight font-fredoka text-slate-800 uppercase shrink-0">
-          {ASSETS.BRAND.LOGO_TEXT_P1} <span className="text-slate-500 font-light">{ASSETS.BRAND.LOGO_TEXT_P2}</span>
+        <Link to="/" className="text-sm md:text-xl font-bold tracking-tight font-fredoka text-white uppercase shrink-0">
+          {ASSETS.BRAND.LOGO_TEXT_P1} <span className="text-amber-400 font-light">{ASSETS.BRAND.LOGO_TEXT_P2}</span>
         </Link>
 
         <div className="hidden md:flex items-center gap-10">
@@ -77,19 +77,19 @@ const Navbar: React.FC<{ cartCount: number }> = ({ cartCount }) => {
             <Link
               key={link.path}
               to={link.path}
-              className={`text-[12px] uppercase tracking-[0.3em] font-black transition-all hover:text-amber-600 ${isActive(link.path) ? 'text-slate-900 underline underline-offset-8 decoration-2 decoration-amber-400' : 'text-slate-900/80'}`}
+              className={`text-[12px] uppercase tracking-[0.3em] font-black transition-all hover:text-amber-400 ${isActive(link.path) ? 'text-white underline underline-offset-8 decoration-2 decoration-amber-400' : 'text-white/80'}`}
             >
               {link.name}
             </Link>
           ))}
-          <button onClick={toggleLanguage} className="relative group p-2 hover:bg-orange-100 rounded-full transition-all flex items-center gap-2 text-[12px] uppercase tracking-widest text-slate-900 font-bold">
-            <Globe className="w-4 h-4 text-slate-900" />
+          <button onClick={toggleLanguage} className="relative group p-2 hover:bg-amber-400/20 rounded-full transition-all flex items-center gap-2 text-[12px] uppercase tracking-widest text-white font-bold">
+            <Globe className="w-4 h-4 text-white" />
             {i18n.language.startsWith('de') ? 'EN' : 'DE'}
           </button>
-          <Link to="/checkout" className="relative group p-2 hover:bg-orange-100 rounded-full transition-all">
-            <ShoppingCart className="w-4 h-4 text-slate-900 hover:text-slate-950" />
+          <Link to="/checkout" className="relative group p-2 hover:bg-amber-400/20 rounded-full transition-all">
+            <ShoppingCart className="w-4 h-4 text-white hover:text-amber-400" />
             {cartCount > 0 && (
-              <span className="absolute -top-1 -right-1 bg-amber-500 text-white text-[11px] font-black rounded-full w-5 h-5 flex items-center justify-center shadow-md">
+              <span className="absolute -top-1 -right-1 bg-amber-400 text-slate-900 text-[11px] font-black rounded-full w-5 h-5 flex items-center justify-center shadow-md">
                 {cartCount}
               </span>
             )}
@@ -99,7 +99,7 @@ const Navbar: React.FC<{ cartCount: number }> = ({ cartCount }) => {
         <div className="flex items-center gap-4 md:hidden">
           <button 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
-            className="text-slate-900 p-2 hover:bg-orange-100 rounded-full transition-colors relative"
+            className="text-white p-2 hover:bg-amber-400/20 rounded-full transition-colors relative"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -115,16 +115,16 @@ const Navbar: React.FC<{ cartCount: number }> = ({ cartCount }) => {
           />
           
           {/* Menu Panel */}
-          <div className="absolute right-0 top-0 bottom-0 w-[85%] bg-amber-50 shadow-2xl flex flex-col h-[100dvh] pt-24 px-8 animate-in slide-in-from-right duration-500 overflow-y-auto">
+          <div className="absolute right-0 top-0 bottom-0 w-[85%] bg-slate-900 shadow-2xl flex flex-col h-[100dvh] pt-24 px-8 animate-in slide-in-from-right duration-500 overflow-y-auto">
             <button 
               onClick={() => setIsMobileMenuOpen(false)} 
-              className="absolute top-5 right-6 p-2 text-slate-500 hover:text-slate-800 transition-colors"
+              className="absolute top-5 right-6 p-2 text-white hover:text-amber-400 transition-colors"
             >
               <X size={24} />
             </button>
             
             <div className="space-y-6">
-              <p className="text-[10px] font-black uppercase tracking-[0.4em] text-orange-400 mb-8 border-b border-orange-200/30 pb-2">{t('nav.menu')}</p>
+              <p className="text-[10px] font-black uppercase tracking-[0.4em] text-amber-400 mb-8 border-b border-amber-400/30 pb-2">{t('nav.menu')}</p>
               
               <div className="flex flex-col gap-5">
                 {navLinks.filter(link => link.mobile !== false).map((link) => (
@@ -132,7 +132,7 @@ const Navbar: React.FC<{ cartCount: number }> = ({ cartCount }) => {
                     key={link.path}
                     to={link.path}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className={`block text-3xl font-fredoka font-bold transition-all ${isActive(link.path) ? 'text-amber-600 translate-x-2' : 'text-slate-800 active:scale-95'}`}
+                    className={`block text-3xl font-fredoka font-bold transition-all ${isActive(link.path) ? 'text-amber-400 translate-x-2' : 'text-white/80 active:scale-95'}`}
                   >
                     {link.name}
                   </Link>
@@ -140,37 +140,37 @@ const Navbar: React.FC<{ cartCount: number }> = ({ cartCount }) => {
                 <Link
                   to="/checkout"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`block text-3xl font-fredoka font-bold transition-all relative flex items-center gap-4 ${isActive('/checkout') ? 'text-amber-600 translate-x-2' : 'text-slate-800 active:scale-95'}`}
+                  className={`block text-3xl font-fredoka font-bold transition-all relative flex items-center gap-4 ${isActive('/checkout') ? 'text-amber-400 translate-x-2' : 'text-white/80 active:scale-95'}`}
                 >
                   {t('nav.checkout')}
                   {cartCount > 0 && (
-                    <span className="bg-amber-500 text-white text-xs font-black px-3 py-1 rounded-full">
+                    <span className="bg-amber-400 text-slate-900 text-xs font-black px-3 py-1 rounded-full">
                       {cartCount}
                     </span>
                   )}
                 </Link>
               </div>
 
-              <div className="pt-10 border-t border-orange-200/50 space-y-8">
+              <div className="pt-10 border-t border-amber-400/20 space-y-8">
                 <div className="space-y-4">
-                  <p className="text-[10px] font-black uppercase tracking-widest text-orange-400">{t('nav.settings')}</p>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-amber-400">{t('nav.settings')}</p>
                   <button 
                     onClick={() => { toggleLanguage(); setIsMobileMenuOpen(false); }}
-                    className="flex items-center gap-4 text-slate-700 font-bold hover:text-amber-600 transition-colors py-2 active:scale-95"
+                    className="flex items-center gap-4 text-white font-bold hover:text-amber-400 transition-colors py-2 active:scale-95"
                   >
-                    <Globe className="w-5 h-5 text-amber-500" />
+                    <Globe className="w-5 h-5 text-amber-400" />
                     <span className="text-xl uppercase tracking-widest">{t('nav.switchLang')}</span>
                   </button>
                 </div>
 
                 <div className="space-y-4 pt-4">
-                  <p className="text-[10px] font-black uppercase tracking-widest text-orange-400">{t('nav.socials')}</p>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-amber-400">{t('nav.socials')}</p>
                   <div className="flex gap-10">
-                    <a href={ASSETS.LINKS.INSTAGRAM} target="_blank" rel="noopener noreferrer" className="p-3 bg-white rounded-2xl shadow-sm border border-orange-100 active:scale-90 transition-transform">
-                      <Instagram className="w-6 h-6 text-slate-600" />
+                    <a href={ASSETS.LINKS.INSTAGRAM} target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-800 rounded-2xl shadow-sm border border-amber-400/30 active:scale-90 transition-transform hover:bg-slate-700">
+                      <Instagram className="w-6 h-6 text-white" />
                     </a>
-                    <a href={ASSETS.LINKS.YOUTUBE} target="_blank" rel="noopener noreferrer" className="p-3 bg-white rounded-2xl shadow-sm border border-orange-100 active:scale-90 transition-transform">
-                      <Youtube className="w-6 h-6 text-slate-600" />
+                    <a href={ASSETS.LINKS.YOUTUBE} target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-800 rounded-2xl shadow-sm border border-amber-400/30 active:scale-90 transition-transform hover:bg-slate-700">
+                      <Youtube className="w-6 h-6 text-white" />
                     </a>
                   </div>
                 </div>
@@ -178,7 +178,7 @@ const Navbar: React.FC<{ cartCount: number }> = ({ cartCount }) => {
             </div>
 
             <div className="mt-auto pb-12 pt-12 flex justify-center">
-              <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">© 2025 Beatrice Egli</p>
+              <p className="text-[9px] font-black uppercase tracking-widest text-white/50">© 2025 Beatrice Egli</p>
             </div>
           </div>
         </div>
