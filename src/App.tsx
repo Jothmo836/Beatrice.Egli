@@ -1,17 +1,15 @@
 
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { HashRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { ShoppingCart, Menu, X, Instagram, Youtube, Globe } from 'lucide-react';
+import { Menu, X, Instagram, Youtube, Globe, Mail, MessageCircle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { ASSETS } from './assets';
-import { CartItem } from './types';
 
 // Lazy load route components for code splitting
 const Home = lazy(() => import('./Home'));
 const Tour = lazy(() => import('./Tour'));
 const Discography = lazy(() => import('./Discography'));
 const About = lazy(() => import('./About'));
-const Checkout = lazy(() => import('./Checkout'));
 
 // Loading fallback component
 const PageLoader = () => (
@@ -28,7 +26,7 @@ const ScrollToTop = () => {
   return null;
 };
 
-const Navbar: React.FC<{ cartCount: number }> = ({ cartCount }) => {
+const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
@@ -86,14 +84,6 @@ const Navbar: React.FC<{ cartCount: number }> = ({ cartCount }) => {
             <Globe className="w-4 h-4 text-white" />
             {i18n.language.startsWith('de') ? 'EN' : 'DE'}
           </button>
-          <Link to="/checkout" className="relative group p-2 hover:bg-amber-400/20 rounded-full transition-all">
-            <ShoppingCart className="w-4 h-4 text-white hover:text-amber-400" />
-            {cartCount > 0 && (
-              <span className="absolute -top-1 -right-1 bg-amber-400 text-slate-900 text-[11px] font-black rounded-full w-5 h-5 flex items-center justify-center shadow-md">
-                {cartCount}
-              </span>
-            )}
-          </Link>
         </div>
 
         <div className="flex items-center gap-4 md:hidden">
@@ -137,18 +127,7 @@ const Navbar: React.FC<{ cartCount: number }> = ({ cartCount }) => {
                     {link.name}
                   </Link>
                 ))}
-                <Link
-                  to="/checkout"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`block text-3xl font-fredoka font-bold transition-all relative flex items-center gap-4 ${isActive('/checkout') ? 'text-amber-400 translate-x-2' : 'text-white/80 active:scale-95'}`}
-                >
-                  {t('nav.checkout')}
-                  {cartCount > 0 && (
-                    <span className="bg-amber-400 text-slate-900 text-xs font-black px-3 py-1 rounded-full">
-                      {cartCount}
-                    </span>
-                  )}
-                </Link>
+                {/* Checkout removed: purchase actions are handled via contact modal */}
               </div>
 
               <div className="pt-10 border-t border-amber-400/20 space-y-8">
@@ -217,7 +196,6 @@ const Footer: React.FC = () => {
         <div className="flex flex-col gap-3">
           <p className="text-[12px] font-black uppercase tracking-widest text-orange-500 mb-4">{t('footer.connect')}</p>
           <Link to="/about" className="text-sm text-slate-500 hover:text-slate-800 transition-colors ">{t('nav.story')}</Link>
-          <Link to="/checkout" className="text-sm text-slate-500 hover:text-slate-800 transition-colors ">{t('nav.checkout')}</Link>
         </div>
       </div>
 
@@ -233,31 +211,58 @@ const Footer: React.FC = () => {
   );
 };
 
+interface ContactRequest {
+  subject: string;
+  message: string;
+}
+
+const ContactModal: React.FC<{ request: ContactRequest; onClose: () => void }> = ({ request, onClose }) => {
+  const { t } = useTranslation();
+
+  const handleEmail = () => {
+    const subject = encodeURIComponent(request.subject);
+    const body = encodeURIComponent(request.message);
+    window.location.href = `mailto:${ASSETS.LINKS.MANAGEMENT_EMAIL}?subject=${subject}&body=${body}`;
+  };
+
+  const handleWhatsApp = () => {
+    const text = encodeURIComponent(request.message);
+    window.open(`https://wa.me/${ASSETS.LINKS.WHATSAPP_ID}?text=${text}`, '_blank');
+  };
+
+  return (
+    <div className="fixed inset-0 z-[1200] flex items-center justify-center p-4 sm:p-6 bg-slate-950/90 backdrop-blur-sm">
+      <div className="w-full max-w-3xl relative bg-slate-900 rounded-[2.5rem] border border-white/10 shadow-2xl overflow-hidden">
+        <button onClick={onClose} className="absolute top-4 right-4 sm:top-6 sm:right-6 text-slate-400 hover:text-white transition-colors text-xs sm:text-sm uppercase tracking-[0.35em] font-black">
+          {t('common.close', 'Close')}
+        </button>
+        <div className="px-6 py-8 sm:px-10 sm:py-12 md:px-14 md:py-16">
+          <p className="text-amber-400 text-[10px] uppercase tracking-[0.4em] mb-4">{t('checkout.contactManagement')}</p>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-5 leading-tight">{request.subject}</h2>
+          <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl mb-8">{t('checkout.instruction')}</p>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <button onClick={handleEmail} className="w-full bg-white text-slate-900 py-4 rounded-2xl font-black uppercase tracking-[0.35em] text-[11px] hover:bg-amber-400 transition-all flex items-center justify-center gap-2">
+              <Mail className="w-5 h-5" /> {t('checkout.contactEmail')}
+            </button>
+            <button onClick={handleWhatsApp} className="w-full bg-emerald-500 text-white py-4 rounded-2xl font-black uppercase tracking-[0.35em] text-[11px] hover:bg-emerald-600 transition-all flex items-center justify-center gap-2">
+              <MessageCircle className="w-5 h-5" /> {t('checkout.contactWhatsApp')}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 function App() {
-  const [cart, setCart] = useState<CartItem[]>([]);
+  const [contactRequest, setContactRequest] = useState<ContactRequest | null>(null);
 
-  const addToCart = (item: CartItem) => {
-    setCart((prev) => {
-      const existing = prev.find((i) => i.id === item.id);
-      if (existing) {
-        return prev.map((i) => i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i);
-      }
-      return [...prev, item];
-    });
+  const openContactRequest = (subject: string, message: string) => {
+    setContactRequest({ subject, message });
   };
 
-  const removeFromCart = (id: string) => {
-    setCart((prev) => prev.filter((i) => i.id !== id));
-  };
-
-  const updateQuantity = (id: string, delta: number) => {
-    setCart((prev) => prev.map((item) => {
-      if (item.id === id) {
-        const newQty = Math.max(1, item.quantity + delta);
-        return { ...item, quantity: newQty };
-      }
-      return item;
-    }));
+  const closeContactRequest = () => {
+    setContactRequest(null);
   };
 
   return (
@@ -270,19 +275,19 @@ function App() {
           <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-orange-200/20 blur-[150px] rounded-full" />
         </div>
         
-        <Navbar cartCount={cart.reduce((acc, i) => acc + i.quantity, 0)} />
+        <Navbar />
         <main className="flex-grow relative z-10">
           <Suspense fallback={<PageLoader />}>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/tour" element={<Tour onAddToCart={addToCart} />} />
-              <Route path="/discography" element={<Discography onAddToCart={addToCart} />} />
+              <Route path="/tour" element={<Tour onPurchaseRequest={openContactRequest} />} />
+              <Route path="/discography" element={<Discography onPurchaseRequest={openContactRequest} />} />
               <Route path="/about" element={<About />} />
-              <Route path="/checkout" element={<Checkout cart={cart} onRemove={removeFromCart} onUpdate={updateQuantity} />} />
             </Routes>
           </Suspense>
         </main>
         <Footer />
+        {contactRequest && <ContactModal request={contactRequest} onClose={closeContactRequest} />}
       </div>
     </HashRouter>
   );

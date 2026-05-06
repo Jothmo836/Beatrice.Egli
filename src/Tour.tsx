@@ -3,14 +3,13 @@ import { MapPin, Star, CheckCircle2, Sparkles, Plus } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'motion/react';
 import { TOUR_DATES, VIP_PACKAGES } from './constants';
-import { CartItem } from './types';
 import { ASSETS } from './assets';
 
 interface TourProps {
-  onAddToCart: (item: CartItem) => void;
+  onPurchaseRequest: (subject: string, message: string) => void;
 }
 
-const Tour: React.FC<TourProps> = ({ onAddToCart }) => {
+const Tour: React.FC<TourProps> = ({ onPurchaseRequest }) => {
   const { t } = useTranslation();
   const [filter, setFilter] = useState<'upcoming' | 'past'>('upcoming');
   const [showAll, setShowAll] = useState(false);
@@ -22,33 +21,25 @@ const Tour: React.FC<TourProps> = ({ onAddToCart }) => {
   const displayDates = showAll ? filteredDates : filteredDates.slice(0, 6);
 
   const handleTicketClick = (date: typeof TOUR_DATES[0]) => {
-    onAddToCart({
-      id: `ticket-${date.id}`,
-      name: `${t('tour.tickets')}: ${date.venue}`,
-      price: 89.99,
-      type: 'ticket',
-      quantity: 1,
-      imageUrl: ASSETS.PLACEHOLDERS.TICKET_THUMB
-    });
+    onPurchaseRequest(
+      `${t('tour.getTickets')} - ${date.venue}`,
+      `Hello,\n\nI would like to purchase tickets for ${date.venue} on ${date.date} in ${date.location}, ${date.country}. Please send payment details via email or WhatsApp.\n\nThank you.`
+    );
   };
 
   const handleVIPClick = (pkg: typeof VIP_PACKAGES[0]) => {
-    onAddToCart({
-      id: `vip-${pkg.id}`,
-      name: `${t('tour.vip').split(' ')[0]}: ${pkg.name}`,
-      price: pkg.price,
-      type: 'vip',
-      quantity: 1,
-      imageUrl: ASSETS.PLACEHOLDERS.VIP_THUMB
-    });
+    onPurchaseRequest(
+      `${t('tour.reserveUpgrade')} - ${pkg.name}`,
+      `Hello,\n\nI would like to reserve the ${pkg.name} package (${pkg.price} EUR). Please send payment details via email or WhatsApp.\n\nThank you.`
+    );
   };
 
   return (
-    <div className="pt-32 md:pt-48 pb-32 md:pb-64 px-6 bg-slate-900 min-h-screen relative overflow-hidden">
+    <div className="pt-32 md:pt-48 pb-32 md:pb-64 px-6 bg-slate-950 min-h-screen relative overflow-hidden">
       {/* Immersive Background Elements */}
-      <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
+      <div className="absolute inset-0 z-0 opacity-30 pointer-events-none">
         <img src={ASSETS.HOME.TOUR_PREVIEW_BG} className="w-full h-full object-cover grayscale" referrerPolicy="no-referrer" loading="lazy" />
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-transparent to-slate-900" />
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-100/85 via-slate-900/20 to-slate-900" />
       </div>
 
       {/* Decorative Glows */}

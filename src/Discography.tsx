@@ -3,26 +3,21 @@ import { X, ShoppingBag, Sparkles, Plus } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'motion/react';
 import { ALBUMS } from './constants';
-import { CartItem, Album } from './types';
+import { Album } from './types';
 
 interface DiscographyProps {
-  onAddToCart: (item: CartItem) => void;
+  onPurchaseRequest: (subject: string, message: string) => void;
 }
 
-const Discography: React.FC<DiscographyProps> = ({ onAddToCart }) => {
+const Discography: React.FC<DiscographyProps> = ({ onPurchaseRequest }) => {
   const { t } = useTranslation();
   const [selectedAlbum, setSelectedAlbum] = useState<Album | null>(null);
 
   const handleBuyAlbum = (album: Album) => {
-    onAddToCart({
-      id: album.id,
-      name: `${album.title} ${t('discography.signedGift')}`,
-      price: album.price,
-      type: 'album',
-      quantity: 1,
-      imageUrl: album.coverUrl,
-      isSigned: true
-    });
+    onPurchaseRequest(
+      `${t('discography.buyNow')} - ${album.title}`,
+      `Hello,\n\nI would like to purchase the signed edition of "${album.title}" (${album.year}). Please send payment details via email or WhatsApp.\n\nThank you.`
+    );
     setSelectedAlbum(null);
   };
 
